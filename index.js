@@ -24,6 +24,9 @@ mongoose
 app.use(cors());
 app.use(express.json());
 
+// users route relates working
+app.use("/users", userManageHandler);
+
 app.get("/", (req, res) => {
   res.send("the resume 360 server open.");
 });
