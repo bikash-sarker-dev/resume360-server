@@ -29,11 +29,9 @@ userRouter.delete("/:id", async (req, res) => {
   const id = req.params.id;
   await User.deleteOne({ _id: id })
     .then((result) => {
-      console.log("The user Delete successfully", result);
       res.status(200).send({ message: "The user Delete successfully" });
     })
     .catch((error) => {
-      console.log("Error Delete user:", error);
       res.status(500).send({ massage: "Error Delete user:", error });
     });
 });
