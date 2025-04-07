@@ -21,8 +21,13 @@ mongoose
     console.log("MongoDb connection error:", error);
   });
 
+const coseOrigin = {
+  origin: ["http://localhost:5173", "https://resume360.netlify.app"],
+  credentials: true,
+  optionalSuccessStatus: 200,
+};
 // middleware use
-app.use(cors());
+app.use(cors(coseOrigin));
 app.use(express.json());
 
 // users route relates working
