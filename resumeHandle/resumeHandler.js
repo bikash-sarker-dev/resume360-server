@@ -1,4 +1,9 @@
 const express = require("express");
-const resumeRoute = express.Router();
+const resumeRouter = express.Router();
+const resumeInfo = require("../model_schemas/resumeSchema.js");
 
-module.exports = resumeRoute;
+resumeRouter.get("/", async (req, res) => {
+  res.send({ message: "test successfully" });
+});
+
+module.exports = resumeRouter;

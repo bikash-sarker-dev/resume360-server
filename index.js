@@ -3,6 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const usersManageHandler = require("./users/userAuthHandler");
+const resumeManage = require("./resumeHandle/resumeHandler.js");
 
 const app = express();
 const port = process.env.SERVER_PORT || 5000;
@@ -32,6 +33,9 @@ app.use(express.json());
 
 // users route relates working
 app.use("/users", usersManageHandler);
+
+// resume route relates working
+app.use("/resume", resumeManage);
 
 app.get("/", (req, res) => {
   res.send("the resume 360 server open.");
