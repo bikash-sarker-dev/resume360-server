@@ -22,4 +22,32 @@ resumeRouter.get("/", async (req, res) => {
   res.send({ message: "test successfully" });
 });
 
+// update resume working
+resumeRouter.put("/:id", async (req, res) => {
+  const id = req.params.id;
+  let updateInformation = req.body;
+  const resumeModel = new resumeInfo();
+  const query = { _id: id };
+  console.log(updateInformation, query);
+  let updateInfo = {
+    $set: {
+      ...updateInformation,
+    },
+  };
+  await resumeInfo
+    .updateOne(query, updateInfo)
+    .then((result) => {
+      console.log(" update resume save");
+      res
+        .status(200)
+        .send({ message: "resume information update save", result });
+    })
+    .catch((error) => {
+      console.log("resume ", error);
+      res
+        .status(500)
+        .send({ message: "resume information update save error", error });
+    });
+});
+
 module.exports = resumeRouter;
