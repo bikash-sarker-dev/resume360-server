@@ -50,4 +50,17 @@ resumeRouter.put("/:id", async (req, res) => {
     });
 });
 
+// delete user working
+resumeRouter.delete("/:id", async (req, res) => {
+  const id = req.params.id;
+  await resumeInfo
+    .deleteOne({ _id: id })
+    .then((result) => {
+      res.status(200).send({ message: "The resume Delete successfully" });
+    })
+    .catch((error) => {
+      res.status(500).send({ massage: "Error Delete resume:", error });
+    });
+});
+
 module.exports = resumeRouter;
