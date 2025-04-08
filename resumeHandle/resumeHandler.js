@@ -63,4 +63,14 @@ resumeRouter.delete("/:id", async (req, res) => {
     });
 });
 
+// get resume relate working
+resumeRouter.get("/", async (req, res) => {
+  try {
+    let result = await resumeInfo.find({});
+    res.status(200).send({ message: "the resume get successfully ", result });
+  } catch (err) {
+    res.status(500).send({ message: "the resume get error ", err });
+  }
+});
+
 module.exports = resumeRouter;
