@@ -1,23 +1,30 @@
 const mongoose = require("mongoose");
-
 const { Schema } = mongoose;
 
+const progressSchema = new Schema(
+  {
+    description: { type: String, required: true },
+    year: { type: String, required: true },
+  },
+  { _id: false }
+);
+
 const createProfileSchema = new Schema({
-  photoURL: {
+  name: {
     type: String,
     required: true,
   },
-  name: String,
+  email: {
+    type: String,
+    required: true,
+  },
   role: String,
   location: String,
   work: String,
   address: String,
   skills: [String],
-  phone: [Number],
-  email: {
-    type: String,
-    required: true,
-  },
+  phone: String,
+
   website: String,
   birthday: {
     type: String,
@@ -27,8 +34,9 @@ const createProfileSchema = new Schema({
     type: String,
     required: true,
   },
+  progress: [progressSchema],
 });
 
-const profile = mongoose.model("Profile", createProfileSchema);
+const profiles = mongoose.model("Profile", createProfileSchema);
 
-module.exports = profile;
+module.exports = profiles;
