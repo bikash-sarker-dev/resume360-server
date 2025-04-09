@@ -10,6 +10,16 @@ const secureApp = require("./appSecurity/security");
 const app = express();
 const port = process.env.SERVER_PORT || 5000;
 
+const coseOrigin = {
+  origin: ["http://localhost:5173", "https://resume360.netlify.app"],
+  credentials: true,
+  optionalSuccessStatus: 200,
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
+// middleware use
+app.use(cors(coseOrigin));
+app.use(express.json());
+
 // mongodb connection
 const dataBaseUrl = process.env.DB_CONNECT_URL;
 mongoose
@@ -23,15 +33,6 @@ mongoose
   .catch((error) => {
     console.log("MongoDb connection error:", error);
   });
-
-const coseOrigin = {
-  origin: ["http://localhost:5173", "https://resume360.netlify.app"],
-  credentials: true,
-  optionalSuccessStatus: 200,
-};
-// middleware use
-app.use(cors(coseOrigin));
-app.use(express.json());
 
 // app security relate work
 app.use("/secure-login", secureApp);
