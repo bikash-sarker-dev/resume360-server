@@ -5,6 +5,7 @@ const cors = require("cors");
 const usersManageHandler = require("./users/userAuthHandler");
 const resumeManage = require("./resumeHandle/resumeHandler.js");
 const profile = require("./profileManage/profileManage");
+const secureApp = require("./appSecurity/security");
 
 const app = express();
 const port = process.env.SERVER_PORT || 5000;
@@ -31,6 +32,9 @@ const coseOrigin = {
 // middleware use
 app.use(cors(coseOrigin));
 app.use(express.json());
+
+// app security relate work
+app.use("/secure-login", secureApp);
 
 // users route relates working
 app.use("/users", usersManageHandler);
