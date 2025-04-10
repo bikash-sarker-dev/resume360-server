@@ -6,6 +6,7 @@ const usersManageHandler = require("./users/userAuthHandler");
 const resumeManage = require("./resumeHandle/resumeHandler.js");
 const profile = require("./profileManage/profileManage");
 const secureApp = require("./appSecurity/security");
+const coverLetterManage = require("./coverLetter/coverLetterManage");
 
 const app = express();
 const port = process.env.SERVER_PORT || 5000;
@@ -42,6 +43,9 @@ app.use("/users", usersManageHandler);
 
 // resume route relates working
 app.use("/resume", resumeManage);
+
+// resume route relates working
+app.use("/cover-letter", coverLetterManage);
 
 // profile route relates working
 app.use("/profile", profile);
