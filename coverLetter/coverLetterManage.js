@@ -1,16 +1,13 @@
 const express = require("express");
 const coverLetterRouter = express.Router();
-const coverLetter = require("../model_schemas/coverLetterSchema");
+const coverLetters = require("../model_schemas/coverLettersSchema");
 
-coverLetterRouter.get("/", async (req, res) => {
-  res.send({ message: "the test successfully" });
-});
 // post resume working
 coverLetterRouter.post("/", async (req, res) => {
-  const coverLetterData = req.body;
-  console.log(coverLetterData);
-  const coverLetterModel = new coverLetter(coverLetterData);
-  await coverLetterModel
+  const coverLettersData = req.body;
+  console.log(coverLettersData);
+  const coverLettersModel = new coverLetters(coverLettersData);
+  await coverLettersModel
     .save()
     .then((result) => {
       console.log("cover letter save");
@@ -29,15 +26,15 @@ coverLetterRouter.post("/", async (req, res) => {
 // update resume working
 coverLetterRouter.put("/:id", async (req, res) => {
   const id = req.params.id;
-  let coverLetterData = req.body;
+  let coverLettersData = req.body;
   const query = { _id: id };
-  console.log(coverLetterData, query);
+  console.log(coverLettersData, query);
   let updateInfo = {
     $set: {
-      ...coverLetterData,
+      ...coverLettersData,
     },
   };
-  await coverLetter
+  await coverLetters
     .updateOne(query, updateInfo)
     .then((result) => {
       console.log(" update cover letter save");
@@ -54,47 +51,48 @@ coverLetterRouter.put("/:id", async (req, res) => {
 });
 
 // delete user working
-// coverLetterRouter.delete("/:id", async (req, res) => {
-//   const id = req.params.id;
-//   await resumeInfo
-//     .deleteOne({ _id: id })
-//     .then((result) => {
-//       res
-//         .status(200)
-//         .send({ message: "The resume Delete successfully", status: 200 });
-//     })
-//     .catch((error) => {
-//       res.status(500).send({ massage: "Error Delete resume:", error });
-//     });
-// });
+coverLetterRouter.delete("/:id", async (req, res) => {
+  const id = req.params.id;
+  await coverLetters
+    .deleteOne({ _id: id })
+    .then((result) => {
+      res
+        .status(200)
+        .send({ message: "The cover letter Delete successfully", status: 200 });
+    })
+    .catch((error) => {
+      res.status(500).send({ massage: "Error Delete cover letter:", error });
+    });
+});
 
 // get all resume relate working
-// coverLetterRouter.get("/", async (req, res) => {
-//   try {
-//     let result = await resumeInfo.find({});
-//     res
-//       .status(200)
-//       .send({ message: "the resume get successfully ", status: 200, result });
-//   } catch (err) {
-//     res.status(500).send({ message: "the resume get error ", err });
-//   }
-// });
+coverLetterRouter.get("/", async (req, res) => {
+  try {
+    let result = await coverLetters.find({});
+    res.status(200).send({
+      message: "the cover letter get successfully ",
+      status: 200,
+      result,
+    });
+  } catch (err) {
+    res.status(500).send({ message: "the cover letter get error ", err });
+  }
+});
 
 // get single resume relate working
-// coverLetterRouter.get("/:id", async (req, res) => {
-//   try {
-//     const id = req.params.id;
-//     const query = { _id: id };
-//     console.log(query);
-//     let result = await resumeInfo.findOne(query);
-//     res.status(200).send({
-//       message: "the resume get single data successfully ",
-//       status: 200,
-//       result,
-//     });
-//   } catch (err) {
-//     res.status(500).send({ message: "the resume get single data error ", err });
-//   }
-// });
+coverLetterRouter.get("/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const query = { _id: id };
+    let result = await coverLetters.findOne(query);
+    res.status(200).send({
+      message: "the cover letter get successfully ",
+      status: 200,
+      result,
+    });
+  } catch (err) {
+    res.status(500).send({ message: "the cover letter error ", err });
+  }
+});
 
 module.exports = coverLetterRouter;

@@ -2,10 +2,6 @@ const express = require("express");
 const profileRouter = express.Router();
 const profiles = require("../model_schemas/profileSchema.js");
 
-profileRouter.get("/", async (req, res) => {
-  res.send({ message: "test profile route backend" });
-});
-
 // post profile related working
 profileRouter.post("/", async (req, res) => {
   const profileInfo = req.body;
