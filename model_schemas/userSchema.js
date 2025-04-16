@@ -17,6 +17,9 @@ const userCreateSchema = new Schema({
     unique: true,
     trim: true,
   },
+  image: {
+    type: String,
+  },
   password: {
     type: String,
     required: true,
@@ -30,6 +33,9 @@ const userCreateSchema = new Schema({
   terms: {
     type: Boolean,
     required: true,
+  },
+  role: {
+    type: String,
   },
 });
 
