@@ -5,7 +5,6 @@ const createCoverLettersSchema = new Schema({
   personalInfo: {
     userId: {
       type: String,
-      required: true,
       index: true,
     },
     fullName: String,

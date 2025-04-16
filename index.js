@@ -8,6 +8,7 @@ const profile = require("./profileManage/profileManage");
 const secureApp = require("./appSecurity/security");
 const coverLetterManage = require("./coverLetter/coverLetterManage");
 const profileImage = require("./profileImageMange/profileImageHandle");
+const adminRole = require("./adminHandler/adminHander");
 
 const app = express();
 const port = process.env.SERVER_PORT || 5000;
@@ -38,6 +39,9 @@ mongoose
 
 // app security relate work
 app.use("/secure-login", secureApp);
+
+// admin relate work
+app.use("/user/role", adminRole);
 
 // users route relates working
 app.use("/users", usersManageHandler);
