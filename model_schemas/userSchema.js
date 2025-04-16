@@ -17,6 +17,9 @@ const userCreateSchema = new Schema({
     unique: true,
     trim: true,
   },
+  image: {
+    type: String,
+  },
   password: {
     type: String,
     required: true,

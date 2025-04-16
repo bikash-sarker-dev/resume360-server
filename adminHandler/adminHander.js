@@ -12,11 +12,6 @@ AdminRoleRouter.patch("/:id", async (req, res) => {
   const query = { _id: id };
   console.log(query);
 
-  const updateRole = {
-    $set: {
-      role: "organizer",
-    },
-  };
   const result = await User.findByIdAndUpdate(query, {
     $set: {
       role: "organizer",
