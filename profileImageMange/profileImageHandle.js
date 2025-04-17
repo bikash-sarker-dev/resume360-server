@@ -15,7 +15,7 @@ profileImageRouter.post("/", async (req, res) => {
     .then((result) => {
       res
         .status(200)
-        .send({ message: " Successfully profile update", status: 200 });
+        .send({ message: " Successfully profile update", status: 200, result });
     })
     .catch((err) => {
       res.status(500).send({ massage: "Error Saving user:", error });
