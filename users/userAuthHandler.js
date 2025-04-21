@@ -23,6 +23,17 @@ userRouter.get("/", async (req, res) => {
   const result = await User.find({});
   res.status(200).send({ message: "the get successfully !", result });
 });
+// block check kra
+userRouter.get("/:email", async (req, res) => {
+  const email = req.params.email;
+  await User.deleteOne({ email: email })
+    .then((result) => {
+      res.status(200).send({ message: "The user find successfully", result });
+    })
+    .catch((error) => {
+      res.status(500).send({ massage: "Error Delete user:", error });
+    });
+});
 
 // delete user working
 userRouter.delete("/:id", async (req, res) => {
