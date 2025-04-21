@@ -36,6 +36,9 @@ const userCreateSchema = new Schema({
   role: {
     type: String,
   },
+  block: {
+    type: Boolean,
+  },
 });
 
 const User = mongoose.model("User", userCreateSchema);

@@ -41,6 +41,28 @@ userRouter.get("/:email", async (req, res) => {
       .send({ message: "the user data get single data error ", err });
   }
 });
+userRouter.patch("/:email", async (req, res) => {
+  const email = req.params.email;
+  let information = req.body;
+  const query = { email: email };
+  let updateInfo = {
+    $set: {
+      block: true,
+    },
+  };
+  await User.updateOne(query, updateInfo)
+    .then((result) => {
+      res.status(200).send({
+        message: "user block successfully",
+        status: 200,
+        result,
+      });
+    })
+    .catch((error) => {
+      console.log("resume ", error);
+      res.status(500).send({ message: "user error", error });
+    });
+});
 
 // delete user working
 userRouter.delete("/:id", async (req, res) => {
