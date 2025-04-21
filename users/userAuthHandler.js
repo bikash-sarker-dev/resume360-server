@@ -24,18 +24,6 @@ userRouter.get("/", async (req, res) => {
   const result = await User.find({});
   res.status(200).send({ message: "the get successfully !", result });
 });
-// block check kra
-// userRouter.get("/:id", async (req, res) => {
-//   const id = req.params.id;
-
-//   await User.findOne(query)
-//     .then((result) => {
-//       res.status(200).send({ message: "The user find successfully", result });
-//     })
-//     .catch((error) => {
-//       res.status(500).send({ massage: "Error Delete user:", error });
-//     });
-// });
 
 userRouter.get("/:email", async (req, res) => {
   try {
