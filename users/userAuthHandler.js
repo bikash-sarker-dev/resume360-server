@@ -41,15 +41,28 @@ userRouter.get("/:email", async (req, res) => {
       .send({ message: "the user data get single data error ", err });
   }
 });
-userRouter.patch("/:email", async (req, res) => {
+userRouter.patch("/block/:email", async (req, res) => {
   const email = req.params.email;
   let information = req.body;
   const query = { email: email };
-  let updateInfo = {
-    $set: {
-      block: true,
-    },
-  };
+  let result = await User.findOne(query);
+  console.log(result?.block);
+
+  let updateInfo = {};
+  if (result?.block && result?.email === email) {
+    updateInfo = {
+      $set: {
+        block: false,
+      },
+    };
+  } else {
+    updateInfo = {
+      $set: {
+        block: true,
+      },
+    };
+  }
+
   await User.updateOne(query, updateInfo)
     .then((result) => {
       res.status(200).send({
