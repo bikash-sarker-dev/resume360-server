@@ -23,8 +23,8 @@ reviewRouter.post("/", async (req, res) => {
 reviewRouter.get("/", async (req, res) => {
   try {
     let result = await review
-      .find({ rating: { $gte: 3 } })
-      .sort({ createdAt: -1 })
+      .find({ rating: { $gte: 4 } })
+      .sort({ createdAt: 1 })
       .limit(5);
     res
       .status(200)

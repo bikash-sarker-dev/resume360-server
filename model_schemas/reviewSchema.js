@@ -7,6 +7,8 @@ const reviewCreateSchema = new Schema({
   },
   email: {
     type: String,
+    unique: true,
+    required: true,
   },
   profession: {
     type: String,
