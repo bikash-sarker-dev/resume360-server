@@ -17,6 +17,9 @@ const reviewCreateSchema = new Schema({
   rating: {
     type: Number,
   },
+  image: {
+    type: String,
+  },
 });
 
 const reviews = mongoose.model("Reviews", reviewCreateSchema);

@@ -3,10 +3,6 @@ const mongoose = require("mongoose");
 const reviewRouter = express.Router();
 const review = require("../model_schemas/reviewSchema");
 
-reviewRouter.get("/", async (req, res) => {
-  res.send({ message: "the review api" });
-});
-
 reviewRouter.post("/", async (req, res) => {
   const userReview = req.body;
   const reviewModel = new review(userReview);
@@ -24,4 +20,17 @@ reviewRouter.post("/", async (req, res) => {
     });
 });
 
+reviewRouter.get("/", async (req, res) => {
+  try {
+    let result = await review
+      .find({ rating: { $gte: 4 } })
+      .sort({ createdAt: 1 })
+      .limit(6);
+    res
+      .status(200)
+      .send({ message: "the review get successfully ", status: 200, result });
+  } catch (err) {
+    res.status(500).send({ message: "the review get error ", err });
+  }
+});
 module.exports = reviewRouter;
