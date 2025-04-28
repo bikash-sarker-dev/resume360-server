@@ -2,6 +2,9 @@ const express = require("express");
 const resumeInRouter = express.Router();
 const resumeIn = require("../model_schemas/resumeImportSchema");
 
+resumeInRouter.get("/", async (req, res) => {
+  res.send({ message: "the resume import file" });
+});
 // post resume working
 // resumeInRouter.post("/", async (req, res) => {
 //   const resumeInformation = req.body;
