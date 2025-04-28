@@ -10,6 +10,7 @@ const coverLetterManage = require("./coverLetter/coverLetterManage");
 const profileImage = require("./profileImageMange/profileImageHandle");
 const adminRole = require("./adminHandler/adminHander");
 const reviewMange = require("./reviewHandler/reviewHandler");
+const resumeImportManage = require("./importResumeManage/resumeImportHandle");
 
 const app = express();
 const port = process.env.SERVER_PORT || 5000;
@@ -49,6 +50,9 @@ app.use("/users", usersManageHandler);
 
 // resume route relates working
 app.use("/resume", resumeManage);
+
+// resume route relates working
+app.use("/resumeIn", resumeImportManage);
 
 // cover letter route relates working
 app.use("/cover-letter", coverLetterManage);
