@@ -9,6 +9,8 @@ const secureApp = require("./appSecurity/security");
 const coverLetterManage = require("./coverLetter/coverLetterManage");
 const profileImage = require("./profileImageMange/profileImageHandle");
 const adminRole = require("./adminHandler/adminHander");
+const reviewMange = require("./reviewHandler/reviewHandler");
+const resumeImportManage = require("./importResumeManage/resumeImportHandle");
 
 const app = express();
 const port = process.env.SERVER_PORT || 5000;
@@ -49,6 +51,9 @@ app.use("/users", usersManageHandler);
 // resume route relates working
 app.use("/resume", resumeManage);
 
+// resume route relates working
+app.use("/resumeIn", resumeImportManage);
+
 // cover letter route relates working
 app.use("/cover-letter", coverLetterManage);
 
@@ -56,6 +61,9 @@ app.use("/cover-letter", coverLetterManage);
 app.use("/profile", profile);
 // profile route relates working
 app.use("/profile-image", profileImage);
+
+// review route relates working
+app.use("/reviews", reviewMange);
 
 app.get("/", (req, res) => {
   res.send("the resume 360 server open.");

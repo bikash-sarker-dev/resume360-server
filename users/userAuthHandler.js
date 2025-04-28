@@ -1,4 +1,5 @@
 const express = require("express");
+const mongoose = require("mongoose");
 const userRouter = express.Router();
 const User = require("../model_schemas/userSchema");
 
@@ -22,6 +23,58 @@ userRouter.post("/", async (req, res) => {
 userRouter.get("/", async (req, res) => {
   const result = await User.find({});
   res.status(200).send({ message: "the get successfully !", result });
+});
+
+userRouter.get("/:email", async (req, res) => {
+  try {
+    const id = req.params.email;
+    const query = { email: id };
+    let result = await User.findOne(query);
+    res.status(200).send({
+      message: "the user block find successfully ",
+      status: 200,
+      result,
+    });
+  } catch (err) {
+    res
+      .status(500)
+      .send({ message: "the user data get single data error ", err });
+  }
+});
+userRouter.patch("/block/:email", async (req, res) => {
+  const email = req.params.email;
+  let information = req.body;
+  const query = { email: email };
+  let result = await User.findOne(query);
+  console.log(result?.block);
+
+  let updateInfo = {};
+  if (result?.block && result?.email === email) {
+    updateInfo = {
+      $set: {
+        block: false,
+      },
+    };
+  } else {
+    updateInfo = {
+      $set: {
+        block: true,
+      },
+    };
+  }
+
+  await User.updateOne(query, updateInfo)
+    .then((result) => {
+      res.status(200).send({
+        message: "user block successfully",
+        status: 200,
+        result,
+      });
+    })
+    .catch((error) => {
+      console.log("resume ", error);
+      res.status(500).send({ message: "user error", error });
+    });
 });
 
 // delete user working
