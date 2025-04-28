@@ -22,9 +22,8 @@ const userCreateSchema = new Schema({
   },
   password: {
     type: String,
-    required: true,
     minlength: 6,
-    maxlength: 40,
+    maxlength: 80,
   },
   date: {
     type: Date,
@@ -36,6 +35,9 @@ const userCreateSchema = new Schema({
   },
   role: {
     type: String,
+  },
+  block: {
+    type: Boolean,
   },
 });
 
