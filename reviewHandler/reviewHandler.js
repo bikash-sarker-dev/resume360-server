@@ -33,19 +33,28 @@ reviewRouter.get("/", async (req, res) => {
     res.status(500).send({ message: "the review get error ", err });
   }
 });
+
 reviewRouter.get("/all", async (req, res) => {
   try {
     let result = await review.find({});
-
-    res
-      .status(200)
-      .send({
-        message: "the review all get successfully ",
-        status: 200,
-        result,
-      });
+    res.status(200).send({
+      message: "the review all get successfully ",
+      status: 200,
+      result,
+    });
   } catch (err) {
     res.status(500).send({ message: "the review get error ", err });
   }
+});
+
+reviewRouter.delete("/:id", async (req, res) => {
+  const id = req.params.id;
+  await User.deleteOne({ _id: id })
+    .then((result) => {
+      res.status(200).send({ message: "The review Delete successfully" });
+    })
+    .catch((error) => {
+      res.status(500).send({ massage: "Error Delete review:", error });
+    });
 });
 module.exports = reviewRouter;
