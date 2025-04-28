@@ -49,7 +49,8 @@ reviewRouter.get("/all", async (req, res) => {
 
 reviewRouter.delete("/:id", async (req, res) => {
   const id = req.params.id;
-  await User.deleteOne({ _id: id })
+  await review
+    .deleteOne({ _id: id })
     .then((result) => {
       res.status(200).send({ message: "The review Delete successfully" });
     })
