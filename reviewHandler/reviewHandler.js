@@ -33,4 +33,19 @@ reviewRouter.get("/", async (req, res) => {
     res.status(500).send({ message: "the review get error ", err });
   }
 });
+reviewRouter.get("/all", async (req, res) => {
+  try {
+    let result = await review.find({});
+
+    res
+      .status(200)
+      .send({
+        message: "the review all get successfully ",
+        status: 200,
+        result,
+      });
+  } catch (err) {
+    res.status(500).send({ message: "the review get error ", err });
+  }
+});
 module.exports = reviewRouter;
