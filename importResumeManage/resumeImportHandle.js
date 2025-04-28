@@ -2,26 +2,25 @@ const express = require("express");
 const resumeInRouter = express.Router();
 const resumeIn = require("../model_schemas/resumeImportSchema");
 
-resumeInRouter.get("/", async (req, res) => {
-  res.send({ message: "the resume import file" });
+// post resume import working
+resumeInRouter.post("/", async (req, res) => {
+  const resumeInformation = req.body;
+  const resumeImportModel = new resumeIn(resumeInformation);
+  await resumeImportModel
+    .save()
+    .then((result) => {
+      console.log("resume save");
+      res.status(200).send({
+        message: "resume import file information save",
+        status: 200,
+        result,
+      });
+    })
+    .catch((error) => {
+      console.log("resume ", error);
+      res.status(500).send({ message: "resume information save error", error });
+    });
 });
-// post resume working
-// resumeInRouter.post("/", async (req, res) => {
-//   const resumeInformation = req.body;
-//   const resumeModel = new resumeInfo(resumeInformation);
-//   await resumeModel
-//     .save()
-//     .then((result) => {
-//       console.log("resume save");
-//       res
-//         .status(200)
-//         .send({ message: "resume information save", status: 200, result });
-//     })
-//     .catch((error) => {
-//       console.log("resume ", error);
-//       res.status(500).send({ message: "resume information save error", error });
-//     });
-// });
 
 // update resume working
 // resumeInRouter.put("/:id", async (req, res) => {
@@ -69,16 +68,18 @@ resumeInRouter.get("/", async (req, res) => {
 // });
 
 // get all resume relate working
-// resumeInRouter.get("/", async (req, res) => {
-//   try {
-//     let result = await resumeInfo.find({});
-//     res
-//       .status(200)
-//       .send({ message: "the resume get successfully ", status: 200, result });
-//   } catch (err) {
-//     res.status(500).send({ message: "the resume get error ", err });
-//   }
-// });
+resumeInRouter.get("/", async (req, res) => {
+  try {
+    let result = await resumeIn.find({});
+    res.status(200).send({
+      message: "the resume import file get successfully ",
+      status: 200,
+      result,
+    });
+  } catch (err) {
+    res.status(500).send({ message: "the resume get error ", err });
+  }
+});
 
 // get single resume relate working
 // resumeInRouter.get("/:id", async (req, res) => {
