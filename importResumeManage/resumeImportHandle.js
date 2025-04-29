@@ -82,20 +82,20 @@ resumeInRouter.get("/", async (req, res) => {
 });
 
 // get single resume relate working
-// resumeInRouter.get("/:id", async (req, res) => {
-//   try {
-//     const id = req.params.id;
-//     const query = { _id: id };
-//     console.log(query);
-//     let result = await resumeInfo.findOne(query);
-//     res.status(200).send({
-//       message: "the resume get single data successfully ",
-//       status: 200,
-//       result,
-//     });
-//   } catch (err) {
-//     res.status(500).send({ message: "the resume get single data error ", err });
-//   }
-// });
+resumeInRouter.get("/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const query = { _id: id };
+    console.log(query);
+    let result = await resumeIn.findOne(query);
+    res.status(200).send({
+      message: "the resume import file get single data successfully ",
+      status: 200,
+      result,
+    });
+  } catch (err) {
+    res.status(500).send({ message: "the resume get single data error ", err });
+  }
+});
 
 module.exports = resumeInRouter;
